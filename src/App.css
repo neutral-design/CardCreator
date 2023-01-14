@@ -1,0 +1,81 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #1A1B41;
+}
+
+header, footer {
+  background-color: #1A1B41;
+  color: #C2E7DA;
+  
+  padding: 0.5em 2em;
+
+  text-align: center;
+}
+
+header {
+  border-radius: 1em 1em 0 0;
+}
+
+footer {
+  border-radius: 0 0 1em 1em ;
+}
+.container {
+  border-radius: 1em;
+  margin: 0.25em auto;
+  background-color: #6290C3;
+  width: 360px;
+
+  
+  
+}
+
+.card-container {
+  border: dashed #1A1B41 1px;
+  margin: .25em .25em;
+  min-width: 300px;
+  min-height: 300px;
+}
+
+.card {
+  background-color: #BAFF29;
+  /* min-width: 300px;
+  min-height: 200px;
+  margin: 1em;
+  border-radius: 0.5em; */
+}
+
+.sliders {
+  margin: 1em;
+}
+
+.slidecontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
+}
+
+.slidecontainer > label {
+  margin: 0 auto 0 0;
+  font-weight: bold;
+}
+
+.slidecontainer > p {
+  font-weight: bold;
+  margin: 0 0 0 0.25em;
+  width: 3em;
+}
+
+.code-container {
+  background-color: #1A1B41;
+  color: white;
+
+  min-width: 300px;
+  min-height: 200px;
+  margin: 1em;
+  border-radius: 0.5em;
+}
