@@ -2,37 +2,110 @@ import { useState, useEffect } from 'react'
 
 import './App.css'
 
+const properties = [
+  {
+    name: "margin",
+    realName: "margin",
+    min: 0,
+    max: 100,
+    initial: 10,
+    unit: "px"
+  },
+  {
+    name: "padding",
+    realName: "padding",
+    min: 0,
+    max: 100,
+    initial: 40,
+    unit: "px"
+  },
+  {
+    name: "borderRadius",
+    realName: "border-radius",
+    min: 0,
+    max: 100,
+    initial: 30,
+    unit: "px"
+  },
+  {
+    name: "borderWidth",
+    realName: "border-width",
+    min: 0,
+    max: 10,
+    initial: 1,
+    unit: "px"
+  },
+  {
+    name: "fontSize",
+    realName: "font-size",
+    min: 0,
+    max: 32,
+    initial: 16,
+    unit: "px"
+  },
+ ]
+
 function App() {
-  const [formData, setFormData] = useState(
-      {sliderMargin: "50", sliderPadding: "50", sliderBorderRadius: "50"}
+ 
+  const [divContent, setDivContent] = useState("Move the sliders to modify this div.")
+  
+  const [propData, setPropData] = useState(
+    properties.reduce((accumulator, currentValue) => { 
+      return ({...accumulator, [currentValue.name]:currentValue.initial})
+    }, {})
   )
-  const [cardStyle, setCardStyle] = useState({
-    
-    padding: formData.sliderPadding+"px", 
-    margin: formData.sliderMargin+"px", 
-    borderRadius:formData.sliderBorderRadius+"px"
-  })
+  const [cardStyle, setCardStyle] = useState(properties.reduce((accumulator, currentValue) => { 
+    return ({...accumulator, [currentValue.name]:currentValue.initial+currentValue.unit})
+  }, {}))
+
 
   function handleChange(event) {
     
-    setFormData(prevFormData => {
+    setPropData(prevFormData => {
         return {
             ...prevFormData,
             [event.target.name]: event.target.value
         }
     })
-}
+  }
+
+  function handleTextChange(event){
+    setDivContent(event.target.value)
+  }
 
   useEffect(() => {
-    setCardStyle(   
-    {
     
-      padding: formData.sliderPadding+"px", 
-      margin: formData.sliderMargin+"px", 
-      borderRadius:formData.sliderBorderRadius+"px"
-    })
-    // console.log(cardStyle)
-  }, [formData]);
+    setCardStyle(properties.reduce((accumulator, currentValue) => { 
+      return ({...accumulator, [currentValue.name]:propData[currentValue.name]+currentValue.unit})
+    }, {}))
+
+  }, [propData]);
+
+
+  const sliders = properties.map((property) => {
+    return (
+      <div className="slidecontainer">
+        <label htmlFor={property.name}>{property.realName}</label>
+        <input 
+          onChange={handleChange}
+          type="range" 
+          min={property.min} 
+          max={property.max}
+          value={propData[property.name]}
+          className="slider" 
+          name={property.name} 
+        />
+        <p className="slidervalue">{propData[property.name]}{property.unit}</p>
+      </div>
+    )
+  })
+
+  const stylingCode = properties.map((property) => {
+    return (
+      <div><span className="property-name">{property.realName}</span>: <span className="property-value">{propData[property.name]}{property.unit}</span></div>
+    )
+  })
+  console.log("StylingCode:", stylingCode)
 
   
 
@@ -46,65 +119,27 @@ function App() {
           <div 
             className="card" 
             style={cardStyle}
-            > Move the sliders to modify this div. 
+            > 
+              {divContent}
           </div>
         </div>
         <div className="sliders">
-          <div className="slidecontainer">
-            <label htmlFor="sliderMargin">Margin</label>
-            <input 
-              onChange={handleChange}
-              type="range" 
-              min="1" 
-              max="100" 
-              value={formData.sliderMargin}
-              className="slider" 
-              name="sliderMargin" 
-            />
-            <p className="slidervalue">{formData.sliderMargin}</p>
-          </div>
-          <div className="slidecontainer">
-            <label htmlFor="sliderPadding">Padding</label>
-            <input 
-              onChange={handleChange}
-              type="range" 
-              min="1" 
-              max="100" 
-              value={formData.sliderPadding}
-              className="slider" 
-              name="sliderPadding" 
-            />
-            <p className="slidervalue">{formData.sliderPadding}</p>
-          </div>
-          <div className="slidecontainer">
-            <label htmlFor="sliderBorderRadius">Border Radius</label>
-            <input 
-                onChange={handleChange}
-                type="range" 
-                min="1" 
-                max="100" 
-                value={formData.sliderBorderRadius}
-                className="slider" 
-                name="sliderBorderRadius" 
-              />
-              <p className="slidervalue">{formData.sliderBorderRadius}</p>
-          </div>
+          {sliders}
         </div>
 
         <div className="code-container">
+
         
-        <pre>
-          Text in a pre element
-          is displayed in a fixed-width
-          font, and it preserves
-          both      spaces and
-          line breaks
-        </pre>
+        div &#123;
+                {stylingCode}
+        &#125;
+            
+        
             
           
         </div>
         <footer>
-          <h1>Footer goes here....</h1>
+          <p>Created by Erik</p>
           
         </footer>
       </div>
