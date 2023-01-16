@@ -7,17 +7,19 @@ const properties = [
     name: "margin",
     realName: "margin",
     min: 0,
-    max: 100,
-    initial: 10,
-    unit: "px"
+    max: 10,
+    initial: 0,
+    step: .01,
+    unit: "em"
   },
   {
     name: "padding",
     realName: "padding",
     min: 0,
-    max: 100,
-    initial: 40,
-    unit: "px"
+    max: 10,
+    initial: 0,
+    step: .01,
+    unit: "em"
   },
   {
     name: "borderRadius",
@@ -25,24 +27,28 @@ const properties = [
     min: 0,
     max: 100,
     initial: 30,
+    step: 1,
     unit: "px"
   },
   {
     name: "borderWidth",
     realName: "border-width",
     min: 0,
-    max: 10,
+    max: 50,
     initial: 1,
+    step: 1,
     unit: "px"
   },
   {
     name: "fontSize",
     realName: "font-size",
     min: 0,
-    max: 32,
-    initial: 16,
-    unit: "px"
+    max: 4,
+    initial: 1,
+    step: .05,
+    unit: "rem"
   },
+
  ]
 
 function App() {
@@ -54,6 +60,7 @@ function App() {
       return ({...accumulator, [currentValue.name]:currentValue.initial})
     }, {})
   )
+
   const [cardStyle, setCardStyle] = useState(properties.reduce((accumulator, currentValue) => { 
     return ({...accumulator, [currentValue.name]:currentValue.initial+currentValue.unit})
   }, {}))
@@ -91,6 +98,7 @@ function App() {
           type="range" 
           min={property.min} 
           max={property.max}
+          step={property.step}
           value={propData[property.name]}
           className="slider" 
           name={property.name} 
@@ -102,19 +110,20 @@ function App() {
 
   const stylingCode = properties.map((property) => {
     return (
-      <div><span className="property-name">{property.realName}</span>: <span className="property-value">{propData[property.name]}{property.unit}</span></div>
+      <div>
+        <span className="property-name">{property.realName}</span>: <span className="property-value">{propData[property.name]}{property.unit};</span>
+      </div>
     )
   })
-  console.log("StylingCode:", stylingCode)
+  
 
   
 
   return (
     <div className="App">
-      
-      
+      <header><p>Card Creator</p></header>
       <div className="container">
-        <header><h1>Card Creator</h1></header>
+        
         <div className="card-container">
           <div 
             className="card" 
@@ -128,21 +137,18 @@ function App() {
         </div>
 
         <div className="code-container">
-
-        
-        div &#123;
-                {stylingCode}
-        &#125;
-            
-        
-            
+          div &#123;
+                  {stylingCode}
+          &#125;
+        </div> 
           
-        </div>
-        <footer>
-          <p>Created by Erik</p>
-          
-        </footer>
       </div>
+      
+      <footer>
+        <p>Created by Erik</p>
+        
+      </footer>
+      
     </div>
   )
 }
