@@ -127,7 +127,7 @@ footer {
     grid-template-rows: repeat(2, 1fr);
     position: absolute;
     top: 4em;
-    bottom: 4em;
+    bottom: 0;
     left: 0;
     right: 0;
   }

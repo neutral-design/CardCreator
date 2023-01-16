@@ -144,10 +144,7 @@ function App() {
           
       </div>
       
-      <footer>
-        <p>Created by Erik</p>
-        
-      </footer>
+
       
     </div>
   )
