@@ -121,7 +121,7 @@ function App() {
 
   return (
     <div className="App">
-      <header><p>Card Creator</p></header>
+      <header><p>Div Creator</p></header>
       <div className="container">
         
         <div className="card-container">
@@ -141,9 +141,12 @@ function App() {
                   {stylingCode}
           &#125;
         </div> 
-          
+        <footer>
+          <p>Created by Erik</p>
+        </footer>
+   
       </div>
-      
+
 
       
     </div>
