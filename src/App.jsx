@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-
+import Settings from './Settings'
 import './App.css'
 
-const properties = [
+const data = [
   {
     name: "margin",
     realName: "margin",
@@ -53,8 +53,11 @@ const properties = [
 
 function App() {
  
+
   const [divContent, setDivContent] = useState("Move the sliders to modify this div.")
   
+  const [properties, setProperties] = useState(data)
+
   const [propData, setPropData] = useState(
     properties.reduce((accumulator, currentValue) => { 
       return ({...accumulator, [currentValue.name]:currentValue.initial})
@@ -78,6 +81,33 @@ function App() {
 
   function handleTextChange(event){
     setDivContent(event.target.value)
+  }
+
+  function handleButtonClick(event){
+    console.log("Settings-button clicked!")
+  }
+
+  function updatePropFunction(propertyName, property, value){
+    console.log(propertyName)
+    console.log(property)
+    console.log(value)
+
+    setProperties(prevProperties => {
+      console.log("Prev properties: ", prevProperties)
+      const newProperties=prevProperties.map(item => {
+        if(item.name===propertyName){
+          return {
+            ...item,
+            [property]:value
+
+          }
+        }
+        return item
+      })
+      console.log("New properties: ", newProperties)
+
+      return [prevProperties]
+    })
   }
 
   useEffect(() => {
@@ -121,7 +151,15 @@ function App() {
 
   return (
     <div className="App">
-      <header><p>Div Creator</p></header>
+      <div className="settings-modal">
+        {/* <Settings propSettings={properties} updatePropFunction={updatePropFunction}/> */}
+      </div>
+      <header>
+        <p>Div Creator</p>
+        {/* <button
+          onClick={handleButtonClick}
+        >Settings</button> */}
+      </header>
       <div className="container">
         
         <div className="card-container">
@@ -141,11 +179,13 @@ function App() {
                   {stylingCode}
           &#125;
         </div> 
-        <footer>
-          <p>Created by Erik</p>
-        </footer>
+        
    
       </div>
+      
+      <footer>
+          <p>Created by Erik</p>
+        </footer>
 
 
       
