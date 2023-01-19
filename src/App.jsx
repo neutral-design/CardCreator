@@ -53,7 +53,7 @@ const data = [
 
 function App() {
  
-
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const [divContent, setDivContent] = useState("Move the sliders to modify this div.")
   
   const [properties, setProperties] = useState(data)
@@ -83,31 +83,14 @@ function App() {
     setDivContent(event.target.value)
   }
 
-  function handleButtonClick(event){
-    console.log("Settings-button clicked!")
+  function handleClick(event){
+    
+    setSettingsOpen(true)
   }
 
-  function updatePropFunction(propertyName, property, value){
-    console.log(propertyName)
-    console.log(property)
-    console.log(value)
-
-    setProperties(prevProperties => {
-      console.log("Prev properties: ", prevProperties)
-      const newProperties=prevProperties.map(item => {
-        if(item.name===propertyName){
-          return {
-            ...item,
-            [property]:value
-
-          }
-        }
-        return item
-      })
-      console.log("New properties: ", newProperties)
-
-      return [prevProperties]
-    })
+  function updatePropFunction(propSettings){
+    setProperties(propSettings)
+    setSettingsOpen(false)
   }
 
   useEffect(() => {
@@ -152,12 +135,13 @@ function App() {
   return (
     <div className="App">
       <div className="settings-modal">
-        {/* <Settings propSettings={properties} updatePropFunction={updatePropFunction}/> */}
+        {settingsOpen && <Settings propSettings={properties} updatePropFunction={updatePropFunction}/>}
       </div>
       <header>
         <p>Div Creator</p>
         {/* <button
-          onClick={handleButtonClick}
+          onClick={handleClick}
+          id="settings-button"
         >Settings</button> */}
       </header>
       <div className="container">

@@ -20,7 +20,7 @@ body {
 }
 header, footer {
   background-color: #6290C3;
-  color: #F1FFE7;
+  color: #1A1B41;
   
   padding: 0.5em 2em;
   text-align: center;
@@ -42,7 +42,7 @@ header {
   border: none;  
 }
 
-header > button {
+header > button, .settings-close-button {
   border: none;
   margin: 0 1em 0 auto;
   font-family: 'Montserrat', sans-serif;
@@ -62,7 +62,7 @@ footer {
 .container {
   
   padding-top: 1em;
-  background-color: #1A1B41;
+  background-color: #F1FFE7;
   width: 100%;
   /* border-radius: 0 0  1em 1em; */
   min-height: calc(100vh - 5rem);
@@ -70,7 +70,7 @@ footer {
 }
 
 .card-container {
-  border: dashed #F1FFE7 1px;
+  border: dashed #1A1B41 1px;
   margin: 0 1em 1em 1em;
   min-width: 200px;
   min-height: 200px;
@@ -84,7 +84,7 @@ footer {
 
 .sliders {
   margin: 1em;
-  color: #C2E7DA;
+  color: #1A1B41;
 }
 
 .slidecontainer {
@@ -138,6 +138,65 @@ footer {
   font-size: inherit;
   background-color: inherit;
 }
+
+.settings-modal {
+  position: absolute;
+  left: 4rem;
+  right: 4rem;
+  top: 4rem;
+  
+  background-color: white;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 1em 1em 5em rgba(0,0,0, .5);
+  
+}
+
+.settings-container {
+  
+}
+
+.radio-container >label {
+  margin: 0 1em 0 0;
+}
+
+.button-container {
+  display: flex;
+
+}
+.settings-close-button {
+  margin: 1em 1em 1em auto;
+
+}
+
+.settings-list-item {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: .2em;
+  margin: .5em 1em;
+  align-items: center;
+}
+
+.settings-input {
+  border: 1px #C2E7DA solid;
+  border-radius: 4px;
+  padding: .25em;
+  margin: 0 1em;
+  width: 4em;
+}
+
+.settings-list-heading {
+  font-weight: 700;
+}
+
+.settings-list-item > p {
+  /* text-align: center; */
+}
+
+.settings-list-propname {
+  /* text-align: right; */
+}
+
+
 
 @media only screen and (min-width: 500px) {
   .App {

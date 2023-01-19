@@ -1,22 +1,47 @@
+import { useState, useEffect } from 'react'
 
 function Settings(props) {
 
+    const [propSettings, setPropSettings] = useState(props.propSettings)
+    
     function handleChange(event){
         
         const [propertyName, property] = event.target.name.split(" ")
         const value=event.target.value
 
-        props.updatePropFunction(propertyName, property, value)
-        
+
+        setPropSettings(prevPropSettings => {
+            return prevPropSettings.map(item => {
+                if(item.name===propertyName){
+                    return {
+                        ...item,
+                        [property]:value
+                    }
+                } else {
+                    return item
+                }
+            })
+            
+        })
     }
-    const propList = props.propSettings.map(property => {
+
+    function handleClick(event){
+        props.updatePropFunction(propSettings)
+    }
+
+
+    useEffect(()=>{
+        // console.log(propSettings)
+    }, propSettings)
+
+    const propList = propSettings.map(property => {
         
         return (
             <div className="settings-list-item">
-                {property.realName}
+                <p className="settings-list-propname">{property.realName}</p>
                 <input 
                     type="text"
-                    
+                    className="settings-input"
                     onChange={handleChange}
                     
                     value={property.min}
@@ -25,7 +50,7 @@ function Settings(props) {
                 
                 <input 
                     type="text"
-                    
+                    className="settings-input"
                     onChange={handleChange}
                     
                     value={property.max}
@@ -34,7 +59,7 @@ function Settings(props) {
                 
                 <input 
                     type="text"
-                    
+                    className="settings-input"
                     onChange={handleChange}
                     
                     value={property.initial}
@@ -43,21 +68,23 @@ function Settings(props) {
                 
                 <input 
                     type="text"
-                    
+                    className="settings-input"
                     onChange={handleChange}
                     
                     value={property.step}
                     name={property.name+" step"}
                     />
                 
-                <input 
-                    type="text"
-                    
-                    onChange={handleChange}
-                    
-                    value={property.unit}
-                    name={property.name +" unit"}
-                    />
+                <div className="radio-container">
+                    <input type="radio" id="px" name={property.name+" unit"} value="px" checked={property.unit==="px"} onChange={handleChange}/>
+                    <label htmlFor="px">px</label>
+                    <input type="radio" id="%" name={property.name+" unit"} value="%" checked={property.unit==="%"} onChange={handleChange}/>
+                    <label htmlFor="%">%</label>
+                    <input type="radio" id="em" name={property.name+" unit"} value="em" checked={property.unit==="em"} onChange={handleChange}/>
+                    <label htmlFor="em">em</label>
+                    <input type="radio" id="rem" name={property.name+" unit"} value="rem" checked={property.unit==="rem"} onChange={handleChange}/>
+                    <label htmlFor="rem">rem</label>
+                </div>
                 
             </div>
             
@@ -65,9 +92,17 @@ function Settings(props) {
     })
 
     return (
-        <div>
-            <h1>This is the Settings-component!</h1>
+        <div className="settings-container">
+            <div className="settings-list-item">
+            <p className="settings-list-heading">Property name:</p>
+            <p className="settings-list-heading">Min value:</p>
+            <p className="settings-list-heading">Max value:</p>
+            <p className="settings-list-heading">Initial value:</p>
+            <p className="settings-list-heading">Step:</p>
+            <p className="settings-list-heading">Unit:</p>
+            </div>
             {propList}
+            <div className="button-container"><button className="settings-close-button" onClick={handleClick}>Done</button></div>
         </div>
     )
 }
