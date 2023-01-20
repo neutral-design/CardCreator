@@ -2,7 +2,27 @@ import { useState, useEffect } from 'react'
 import Settings from './Settings'
 import './App.css'
 
+const dataFromLocalstorage = JSON.parse(localStorage.getItem("properties"))
+
 const data = [
+  {
+    name: "width",
+    realName: "width",
+    min: 0,
+    max: 100,
+    initial: 100,
+    step: 1,
+    unit: "%"
+  },
+  {
+    name: "height",
+    realName: "height",
+    min: 0,
+    max: 100,
+    initial: 100,
+    step: 1,
+    unit: "%"
+  },
   {
     name: "margin",
     realName: "margin",
@@ -48,6 +68,7 @@ const data = [
     step: .05,
     unit: "rem"
   },
+  
 
  ]
 
@@ -56,7 +77,7 @@ function App() {
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [divContent, setDivContent] = useState("Move the sliders to modify this div.")
   
-  const [properties, setProperties] = useState(data)
+  const [properties, setProperties] = useState(dataFromLocalstorage? dataFromLocalstorage:data)
 
   const [propData, setPropData] = useState(
     properties.reduce((accumulator, currentValue) => { 
@@ -93,6 +114,11 @@ function App() {
     setSettingsOpen(false)
   }
 
+  useEffect(()=> {
+    
+    localStorage.setItem("properties",JSON.stringify(properties))
+  },[properties])
+
   useEffect(() => {
     
     setCardStyle(properties.reduce((accumulator, currentValue) => { 
@@ -100,6 +126,8 @@ function App() {
     }, {}))
 
   }, [propData]);
+
+
 
 
   const sliders = properties.map((property) => {
@@ -139,10 +167,10 @@ function App() {
       </div>
       <header>
         <p>Div Creator</p>
-        {/* <button
+        <button
           onClick={handleClick}
           id="settings-button"
-        >Settings</button> */}
+        >Settings</button>
       </header>
       <div className="container">
         

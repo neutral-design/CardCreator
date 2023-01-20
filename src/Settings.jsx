@@ -39,7 +39,10 @@ function Settings(props) {
         return (
             <div className="settings-list-item">
                 <p className="settings-list-propname">{property.realName}</p>
+
+                <label  htmlFor="min-input">Min:</label>
                 <input 
+                    id="min-input"
                     type="text"
                     className="settings-input"
                     onChange={handleChange}
@@ -47,8 +50,9 @@ function Settings(props) {
                     value={property.min}
                     name={property.name+" min"}
                     />
-                
+                <label htmlFor="max-input">Max:</label>
                 <input 
+                    id="max-input"
                     type="text"
                     className="settings-input"
                     onChange={handleChange}
@@ -56,8 +60,9 @@ function Settings(props) {
                     value={property.max}
                     name={property.name+" max"}
                     />
-                
+                <label htmlFor="initial-input">Initial:</label>
                 <input 
+                    id="initial-input"
                     type="text"
                     className="settings-input"
                     onChange={handleChange}
@@ -65,8 +70,9 @@ function Settings(props) {
                     value={property.initial}
                     name={property.name+" initial"}
                     />
-                
+                <label htmlFor="step-input">Step:</label>
                 <input 
+                    id="step-input"
                     type="text"
                     className="settings-input"
                     onChange={handleChange}
@@ -74,8 +80,9 @@ function Settings(props) {
                     value={property.step}
                     name={property.name+" step"}
                     />
-                
+                <label>Unit:</label>
                 <div className="radio-container">
+                    
                     <input type="radio" id="px" name={property.name+" unit"} value="px" checked={property.unit==="px"} onChange={handleChange}/>
                     <label htmlFor="px">px</label>
                     <input type="radio" id="%" name={property.name+" unit"} value="%" checked={property.unit==="%"} onChange={handleChange}/>
@@ -93,14 +100,7 @@ function Settings(props) {
 
     return (
         <div className="settings-container">
-            <div className="settings-list-item">
-            <p className="settings-list-heading">Property name:</p>
-            <p className="settings-list-heading">Min value:</p>
-            <p className="settings-list-heading">Max value:</p>
-            <p className="settings-list-heading">Initial value:</p>
-            <p className="settings-list-heading">Step:</p>
-            <p className="settings-list-heading">Unit:</p>
-            </div>
+
             {propList}
             <div className="button-container"><button className="settings-close-button" onClick={handleClick}>Done</button></div>
         </div>
