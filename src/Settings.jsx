@@ -26,7 +26,16 @@ function Settings(props) {
     }
 
     function handleClick(event){
-        props.updatePropFunction(propSettings)
+        console.log(event.target.id)
+        if(event.target.id==="done-button"){
+            props.updatePropFunction(propSettings)
+        } else if(event.target.id==="cancel-button"){
+            props.updatePropFunction(null)
+        }
+        else if(event.target.id==="reset-button"){
+            props.updatePropFunction(-1)
+        }
+        
     }
 
 
@@ -102,7 +111,12 @@ function Settings(props) {
         <div className="settings-container">
 
             {propList}
-            <div className="button-container"><button className="settings-close-button" onClick={handleClick}>Done</button></div>
+            <div className="button-container">
+                <button className="settings-reset-button" onClick={handleClick} id="reset-button">Reset to default</button>
+                <div><button className="settings-cancel-button" onClick={handleClick} id="cancel-button">Cancel</button>
+                <button className="settings-close-button" onClick={handleClick} id="done-button">Save</button></div>
+            </div>
+            
         </div>
     )
 }

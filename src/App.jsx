@@ -110,13 +110,30 @@ function App() {
   }
 
   function updatePropFunction(propSettings){
-    setProperties(propSettings)
     setSettingsOpen(false)
+    if(propSettings===-1){
+      setProperties(data)
+      return
+    }
+    if(propSettings){
+      
+      setProperties(propSettings)
+    }else {
+      // Falsy value, clicked cancel
+            
+      return
+    }
+    
+    
   }
 
   useEffect(()=> {
     
     localStorage.setItem("properties",JSON.stringify(properties))
+    setPropData(properties.reduce((accumulator, currentValue) => { 
+        return ({...accumulator, [currentValue.name]:currentValue.initial})
+      }, {})
+    )
   },[properties])
 
   useEffect(() => {

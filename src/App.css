@@ -42,7 +42,10 @@ header {
   border: none;  
 }
 
-header > button, .settings-close-button {
+header > button, 
+.settings-close-button, 
+.settings-reset-button, 
+.settings-cancel-button {
   border: none;
   margin: 0 1em 0 auto;
   font-family: 'Montserrat', sans-serif;
@@ -165,11 +168,29 @@ footer {
 
 .button-container {
   display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  padding: 1em;
+}
+
+.button-container > div {
+  display: flex;
+  gap: 1em;
+}
+
+
+.settings-close-button {
+  margin: 0 0 0 0;
 
 }
-.settings-close-button {
-  margin: 1em 1em 1em auto;
 
+.settings-reset-button {
+  margin: 0 0 0 0 ;
+}
+
+.settings-cancel-button {
+  margin: 0 auto 0 auto;
 }
 
 .settings-list-item {
@@ -255,5 +276,10 @@ footer {
     margin: .5em 1em;
     align-items: center;
   }
-  
+
+  .button-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
 }
